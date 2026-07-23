@@ -116,3 +116,77 @@ The question only says the functions are **executed one after another**, not tha
 >
 > * **"Executed one after another"** → **Procedural cohesion**
 > * **"Output of one becomes input of next"** → **Sequential cohesion**
+
+The correct answer is:
+
+✅ **The modules have high cohesion and are highly coupled.**
+
+### Step 1: Analyze cohesion
+
+The modules are:
+
+* Product Listing Module
+* Order Processing Module
+* Payment Module
+
+Each module performs **one specific task**.
+
+This means each module has **high cohesion**.
+
+> **High cohesion = A module focuses on a single, well-defined responsibility.**
+
+---
+
+### Step 2: Analyze coupling
+
+The question states:
+
+> **All modules need to access a shared order database** to retrieve and update order statuses, customer information, and payment details.
+
+Since all modules depend on the same shared database, they are **dependent on a common resource**.
+
+This indicates **high coupling** (specifically, common coupling).
+
+---
+
+### Why the other options are incorrect
+
+#### ❌ Low cohesion and highly coupled
+
+Incorrect because each module has a clear responsibility.
+
+---
+
+#### ❌ Low cohesion and loosely coupled
+
+Incorrect because:
+
+* Cohesion is high.
+* They share a common database, so they are not loosely coupled.
+
+---
+
+#### ❌ High cohesion and loosely coupled
+
+This would be true only if the modules interacted through well-defined interfaces or APIs without depending directly on a shared database.
+
+In the given scenario, the shared database creates **high coupling**.
+
+---
+
+## Summary
+
+| Concept      | Observation                                                                   |
+| ------------ | ----------------------------------------------------------------------------- |
+| **Cohesion** | Each module has one responsibility → **High cohesion**                        |
+| **Coupling** | All modules depend on a shared database → **High coupling (common coupling)** |
+
+### ✅ Correct Answer:
+
+**The modules have high cohesion and are highly coupled.**
+
+### Exam tip
+
+* **One module = one task** → **High cohesion**.
+* **Shared global data/database used by many modules** → **High coupling (common coupling)**.
+* **Independent modules communicating via interfaces/APIs** → **Loose coupling**.
