@@ -616,6 +616,82 @@ Here's a quick-reference set of concise definitions:
 * Behavioural → Coordinates object interactions
 
 ---
+Here's a breakdown highlighting what makes each pattern distinct and how to spot which one to use:
+
+## Creational vs Structural vs Behavioral — the first filter
+
+- **Factory, Builder** → about **creating objects**
+- **Facade, Adapter** → about **organizing/connecting existing structures**
+- **Iterator, Observer, Strategy** → about **managing behavior/interaction**
+
+---
+
+## Factory vs Builder (both create objects — but differ in *what* problem they solve)
+
+**Factory Pattern**
+- **Key idea:** Decides *which class* to instantiate based on some input/condition. One-step creation.
+- **Identify it when:** You have multiple related classes implementing a common interface, and you want to hide the "which one to pick" logic from the client.
+- **Example:** `ShapeFactory.create("circle")` returns a `Circle` object; `create("square")` returns a `Square`. The client never calls `new Circle()` directly.
+
+**Builder Pattern**
+- **Key idea:** Constructs a *single complex object* step-by-step, when that object has many optional parts/configurations.
+- **Identify it when:** A constructor would otherwise need 8+ parameters, or an object must be built in stages.
+- **Example:** `new PizzaBuilder().setSize("large").addTopping("cheese").addTopping("olives").build()`.
+
+**Core distinction:** Factory picks *which type*; Builder assembles *one complex object's parts*.
+
+---
+
+## Facade vs Adapter (both simplify interfaces — but differ in *purpose*)
+
+**Facade Pattern**
+- **Key idea:** Provides a single, simplified entry point to a complex subsystem with many classes.
+- **Identify it when:** A client needs to make several calls across multiple subsystem classes just to do one task, and you want to hide that complexity.
+- **Example:** `HomeTheaterFacade.watchMovie()` internally turns on the projector, dims lights, and starts the sound system — the client just calls one method.
+
+**Adapter Pattern**
+- **Key idea:** Converts one *incompatible interface* into another interface the client expects — enabling two mismatched systems to work together.
+- **Identify it when:** You're integrating a third-party or legacy class whose interface doesn't match what your code expects.
+- **Example:** A `EuropeanPlugAdapter` lets a US-style plug (interface A) fit into a European socket (interface B).
+
+**Core distinction:** Facade *simplifies* (fewer calls, same underlying interfaces); Adapter *translates* (bridges mismatched interfaces).
+
+---
+
+## Iterator vs Observer vs Strategy (behavioral — differ in what "changes" or is decoupled)
+
+**Iterator Pattern**
+- **Key idea:** Provides a standard way to traverse elements of a collection without exposing its internal structure (array, tree, linked list, etc.).
+- **Identify it when:** You need to loop through a custom collection uniformly, regardless of how it's stored internally.
+- **Example:** `for (Book b : library)` — `library` could be backed by an array or a hashmap; the client doesn't care.
+
+**Observer Pattern**
+- **Key idea:** One-to-many dependency — when one object's state changes, all dependents are automatically notified.
+- **Identify it when:** You need an event/notification system — multiple parts of your system must react to a change without tight coupling.
+- **Example:** A `WeatherStation` (subject) notifies `PhoneDisplay` and `WebDisplay` (observers) whenever the temperature updates.
+
+**Strategy Pattern**
+- **Key idea:** Encapsulates interchangeable algorithms/behaviors, letting the client choose or switch behavior at runtime.
+- **Identify it when:** You have several ways to perform the *same task* (e.g., sorting, payment processing) and want to swap between them without `if-else` chains.
+- **Example:** `PaymentContext.setStrategy(new CreditCardPayment())` vs `setStrategy(new PayPalPayment())` — same `pay()` call, different behavior underneath.
+
+**Core distinction:** Iterator = "how do I *move through* data"; Observer = "how do I *react* to a change elsewhere"; Strategy = "how do I *swap* an algorithm."
+
+---
+
+## Quick identification cheat-sheet
+
+| Pattern | Ask yourself... |
+|---|---|
+| Factory | "Do I need to create one of *several possible types* without hardcoding `new`?" |
+| Builder | "Am I constructing *one object* with lots of optional configuration steps?" |
+| Facade | "Am I hiding *subsystem complexity* behind a simple API?" |
+| Adapter | "Am I making two *incompatible interfaces* talk to each other?" |
+| Iterator | "Do I need to *traverse* a collection without exposing its internals?" |
+| Observer | "Do multiple objects need to be *notified* when one object changes?" |
+| Strategy | "Do I need to *swap algorithms* interchangeably at runtime?" |
+
+---
 
 # Most Important Topics (Exam Priority)
 
