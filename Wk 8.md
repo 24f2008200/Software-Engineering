@@ -554,6 +554,46 @@ Be able to write these in one or two sentences:
 * All five SOLID principles
 
 ---
+Here's a quick-reference set of concise definitions:
+
+**Software Architecture** — The high-level structure of a software system, comprising its components, their relationships, and the principles governing its design and evolution.
+
+**Architecture Style** — A named collection of design decisions and constraints (e.g., layered, client-server, microservices) that shapes the structure and interaction patterns of a system.
+
+**Component** — A modular, replaceable unit of software that encapsulates its implementation and exposes functionality through well-defined interfaces.
+
+**Connector** — The mechanism that enables communication, coordination, or data transfer between components (e.g., method calls, message queues, pipes).
+
+**Protocol** — A set of rules defining how components or systems exchange data, including format, sequencing, and error handling.
+
+**Design Pattern** — A reusable, general solution to a commonly occurring problem within a given context in software design.
+
+**Design Smell** — A structural characteristic in code or design that indicates a possible violation of design principles and may hinder maintainability or extensibility.
+
+**Refactoring** — The process of restructuring existing code to improve its internal structure and readability without changing its external behavior.
+
+**Factory Pattern** — A creational pattern that provides an interface for creating objects without specifying their exact concrete classes.
+
+**Builder Pattern** — A creational pattern that separates the construction of a complex object from its representation, allowing the same construction process to create different representations.
+
+**Facade Pattern** — A structural pattern that provides a simplified, unified interface to a larger, more complex subsystem.
+
+**Adapter Pattern** — A structural pattern that converts the interface of one class into another interface expected by clients, allowing incompatible interfaces to work together.
+
+**Iterator Pattern** — A behavioral pattern that provides a way to sequentially access elements of a collection without exposing its underlying representation.
+
+**Observer Pattern** — A behavioral pattern where an object (subject) maintains a list of dependents (observers) and notifies them automatically of any state changes.
+
+**Strategy Pattern** — A behavioral pattern that defines a family of interchangeable algorithms, encapsulating each one and allowing the algorithm to vary independently of the clients that use it.
+
+**SOLID Principles:**
+- **Single Responsibility Principle** — A class should have only one reason to change, meaning it should have only one job or responsibility.
+- **Open/Closed Principle** — Software entities should be open for extension but closed for modification, allowing behavior to be extended without altering existing code.
+- **Liskov Substitution Principle** — Objects of a superclass should be replaceable with objects of a subclass without affecting the correctness of the program.
+- **Interface Segregation Principle** — Clients should not be forced to depend on interfaces they do not use; prefer smaller, specific interfaces over large, general-purpose ones.
+- **Dependency Inversion Principle** — High-level modules should not depend on low-level modules; both should depend on abstractions, and abstractions should not depend on details.
+
+---
 
 # Mnemonics
 
