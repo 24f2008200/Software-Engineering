@@ -1,3 +1,454 @@
+For exams (especially **Software Engineering, UML, NPTEL, ISTQB**), you really only need to memorize about **8-10 UML relationships and symbols**. Here's a compact cheat sheet.
+
+---
+
+# 1. Association (Knows / Uses)
+
+### Symbol
+
+```text
+ClassA -------- ClassB
+```
+
+or
+
+```text
+ClassA -------> ClassB
+```
+
+(navigable association)
+
+### Meaning
+
+One class **uses or knows about** another.
+
+Example:
+
+```text
+Student -------- Course
+```
+
+A student enrolls in a course.
+
+### Java example
+
+```java
+class Student {
+    Course course;
+}
+```
+
+Remember:
+
+> Association = **"has a reference to."**
+
+---
+
+# 2. Aggregation (Weak HAS-A)
+
+### Symbol
+
+```text
+ClassA ◇-------- ClassB
+```
+
+(Hollow diamond)
+
+Diamond is on the **owner** side.
+
+### Meaning
+
+The part can exist independently.
+
+Example
+
+```text
+Department ◇------ Employee
+```
+
+Employees still exist even if the department closes.
+
+Java
+
+```java
+class Department {
+    List<Employee> employees;
+}
+```
+
+Employees can belong elsewhere.
+
+### Memory trick
+
+> Hollow diamond = Loose ownership
+
+---
+
+# 3. Composition (Strong HAS-A)
+
+### Symbol
+
+```text
+ClassA ◆-------- ClassB
+```
+
+(Filled diamond)
+
+### Meaning
+
+The part cannot exist independently.
+
+Example
+
+```text
+House ◆------ Room
+```
+
+Destroy the house, the rooms are gone.
+
+Another example
+
+```text
+Human ◆------ Heart
+```
+
+### Java
+
+```java
+class House {
+
+    private Room room = new Room();
+
+}
+```
+
+House creates and owns the room.
+
+### Memory trick
+
+> Black diamond = Strong ownership
+
+---
+
+# 4. Inheritance (IS-A)
+
+### Symbol
+
+```text
+       △
+       |
+Child ---- Parent
+```
+
+(Hollow triangle)
+
+Actually drawn as
+
+```text
+Child --------▷ Parent
+```
+
+Example
+
+```text
+Car
+   △
+Vehicle
+```
+
+Means
+
+```text
+Car IS-A Vehicle
+```
+
+Java
+
+```java
+class Car extends Vehicle
+```
+
+### Memory trick
+
+Triangle always means
+
+> IS-A
+
+---
+
+# 5. Realization (Implements Interface)
+
+### Symbol
+
+```text
+- - - -▷
+```
+
+Dashed line + hollow triangle
+
+Example
+
+```text
+Printer --------▷ Printable
+```
+
+Java
+
+```java
+class Printer implements Printable
+```
+
+### Memory trick
+
+Dashed triangle
+
+=
+
+implements
+
+---
+
+# 6. Dependency (Temporary Use)
+
+### Symbol
+
+```text
+--------->
+```
+
+Dashed arrow
+
+### Meaning
+
+Uses temporarily.
+
+Example
+
+```java
+void print(Book book)
+```
+
+Book isn't stored.
+
+Only used.
+
+### Memory trick
+
+Dependency
+
+=
+
+uses for a while.
+
+---
+
+# 7. Multiplicity
+
+Shows **how many objects** participate.
+
+Example
+
+```text
+Teacher 1 -------- * Student
+```
+
+Means
+
+One teacher
+
+Many students
+
+Common notations
+
+```text
+1
+
+0..1
+
+*
+
+0..*
+
+1..*
+
+5
+
+2..5
+```
+
+Examples
+
+```text
+Person 1 ---- 1 Passport
+
+Company 1 ---- * Employee
+
+Library 1 ---- * Book
+
+Student * ---- * Course
+```
+
+---
+
+# 8. Visibility Symbols
+
+Inside a class
+
+```text
++ public
+
+- private
+
+# protected
+
+~ package/default
+```
+
+Example
+
+```text
+-------------------------
+Employee
+-------------------------
+-id : int
++name : String
+#salary : double
+~address : String
+-------------------------
+```
+
+---
+
+# 9. Abstract Class
+
+Class name
+
+```text
+Vehicle
+```
+
+is written
+
+*italic*
+
+or
+
+```text
+<<abstract>>
+Vehicle
+```
+
+Method
+
+```text
+calculate()
+```
+
+also italic.
+
+Java
+
+```java
+abstract class Vehicle
+```
+
+---
+
+# 10. Interface
+
+Shown as
+
+```text
+<<interface>>
+Printable
+```
+
+or
+
+```text
+○ Printable
+```
+
+Java
+
+```java
+interface Printable
+```
+
+---
+
+# Complete Memory Table
+
+| UML Symbol                | Relationship          | Java Equivalent   | Memory Trick                       |
+| ------------------------- | --------------------- | ----------------- | ---------------------------------- |
+| `────`                    | Association           | Object reference  | Knows/Uses                         |
+| `────>`                   | Navigable Association | One-way reference | Can access only one direction      |
+| `◇────`                   | Aggregation           | Has-a (weak)      | Hollow diamond = independent       |
+| `◆────`                   | Composition           | Has-a (strong)    | Black diamond = lifetime dependent |
+| `────▷` (hollow triangle) | Inheritance           | `extends`         | IS-A                               |
+| `- - -▷`                  | Realization           | `implements`      | Dashed = interface                 |
+| `- - ->`                  | Dependency            | Temporary use     | Uses temporarily                   |
+| `1`, `*`, `0..*`          | Multiplicity          | Number of objects | Cardinality                        |
+| `+`                       | Public                | `public`          | Everyone                           |
+| `-`                       | Private               | `private`         | Class only                         |
+| `#`                       | Protected             | `protected`       | Family                             |
+| `~`                       | Package               | default           | Same package                       |
+
+---
+
+# One-minute exam trick
+
+If you see:
+
+```text
+◇
+```
+
+👉 Aggregation (weak has-a)
+
+If you see:
+
+```text
+◆
+```
+
+👉 Composition (strong has-a)
+
+If you see:
+
+```text
+△
+```
+
+👉 Inheritance (`extends`)
+
+If you see:
+
+```text
+- - -▷
+```
+
+👉 Interface (`implements`)
+
+If you see:
+
+```text
+-------->
+```
+
+👉 Dependency (temporary use)
+
+If you see:
+
+```text
+--------
+```
+
+👉 Association
+
+These six symbols alone cover **over 90% of UML relationship questions** that typically appear in software engineering exams.
+
+
 The correct answer is:
 
 ✅ **Seller and Inventory have an association relationship.**
