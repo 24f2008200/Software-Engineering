@@ -395,3 +395,205 @@ interface PhysicalDelivery {
 * **OCP** → **Add new behavior by extending, not modifying**
 * **LSP** → **Every child should behave like its parent promises**
 * **ISP** → **Many small, focused interfaces are better than one large interface**
+
+
+
+
+
+
+
+
+
+
+The correct answer is **✅ Dependency Inversion Principle (DIP)**.
+
+This question is a classic example of **depending on an abstraction rather than a concrete class**.
+
+## 1. Original design
+
+Initially, the `Producer` directly depends on:
+
+```text
+Producer ───────→ ManufacturedComponent
+```
+
+So `Producer` is tied to the concrete class `ManufacturedComponent`.
+
+The problem appears when the plant starts **purchasing components externally**.
+
+Now we need:
+
+```text
+Producer → ManufacturedComponent
+Producer → PurchasedComponent
+```
+
+The `Producer` would have to know about each concrete component type. That's undesirable.
+
+---
+
+## 2. Refined design
+
+The designer introduces an interface:
+
+```text
+              Component <<interface>>
+                     ↑
+              ┌──────┴──────┐
+              │             │
+ ManufacturedComponent   PurchasedComponent
+```
+
+And `Producer` now depends on the interface:
+
+```text
+Producer ───────→ Component
+                    ↑
+             ┌──────┴──────┐
+             │             │
+       Manufactured     Purchased
+        Component        Component
+```
+
+The `Producer` simply says:
+
+```text
+request(Component)
+```
+
+It doesn't care whether the component is manufactured internally or purchased from a vendor.
+
+---
+
+# Why is this Dependency Inversion?
+
+The **Dependency Inversion Principle** says:
+
+> **High-level modules should not depend on low-level modules. Both should depend on abstractions.**
+
+And:
+
+> **Abstractions should not depend on details. Details should depend on abstractions.**
+
+Here:
+
+### Before
+
+```text
+Producer
+   ↓
+ManufacturedComponent
+```
+
+`Producer` depends directly on a **concrete implementation**.
+
+### After
+
+```text
+Producer
+   ↓
+Component <<interface>>
+   ↑
+   ├── ManufacturedComponent
+   └── PurchasedComponent
+```
+
+Both the high-level `Producer` and concrete component classes are connected through the **abstraction `Component`**.
+
+Therefore:
+
+**✅ Dependency Inversion Principle**
+
+---
+
+## 🧠 Why not the other SOLID principles?
+
+This is where exam questions can become sneaky.
+
+### ❌ Single Responsibility Principle
+
+SRP asks:
+
+> "Does a class have only one reason to change?"
+
+That's not the main issue here.
+
+---
+
+### ❌ Open-Closed Principle
+
+OCP says:
+
+> **Open for extension, closed for modification.**
+
+The new design *does* have an OCP benefit because we can add:
+
+```text
+VendorComponent
+```
+
+without changing `Producer`.
+
+But the **specific design change described here** is introducing an interface so that `Producer` doesn't depend on concrete implementations.
+
+Therefore the intended answer is **DIP**.
+
+---
+
+### ❌ Liskov Substitution Principle
+
+LSP is about whether subclasses can safely substitute for their base type.
+
+For example:
+
+```text
+Component c;
+
+c = new ManufacturedComponent();
+c = new PurchasedComponent();
+```
+
+Both should behave consistently according to the `Component` contract.
+
+The diagram does establish this relationship, but **the reason for introducing the interface in this scenario is dependency inversion**, not primarily substitution.
+
+---
+
+### ❌ Interface Segregation Principle
+
+ISP says:
+
+> Don't force clients to depend on methods they don't use.
+
+For example, instead of:
+
+```text
+BigInterface
+ ├── make()
+ ├── ship()
+ ├── repair()
+ ├── manufacture()
+ └── purchase()
+```
+
+split it into smaller interfaces.
+
+That isn't what's happening here.
+
+---
+
+## 🎯 Exam shortcut
+
+Whenever you see:
+
+> **Concrete class → replaced/decoupled by interface → multiple implementations**
+
+think:
+
+### **DIP = Depend on abstraction, not concrete implementation.**
+
+For this question:
+
+**`Producer → Component <<interface>> ← ManufacturedComponent / PurchasedComponent`**
+
+👉 **Answer: Dependency Inversion Principle (DIP) ✅**
