@@ -1,3 +1,60 @@
+
+The correct answers are:
+
+### ✅ Creational Design Patterns
+
+* **Singleton**
+* **Factory Method**
+
+The others belong to different categories:
+
+| Pattern              | Category       | Purpose                                                       |
+| -------------------- | -------------- | ------------------------------------------------------------- |
+| **Singleton** ✅      | **Creational** | Ensures only one instance of a class exists                   |
+| **Factory Method** ✅ | **Creational** | Creates objects without specifying their exact concrete class |
+| **Adapter** ❌        | **Structural** | Makes incompatible interfaces work together                   |
+| **Decorator** ❌      | **Structural** | Dynamically adds behavior to an object                        |
+| **Observer** ❌       | **Behavioral** | Establishes a one-to-many notification relationship           |
+
+### 🧠 Remember the 3 categories
+
+**Creational → How objects are CREATED**
+
+* Singleton
+* Factory Method
+* Abstract Factory
+* Builder
+* Prototype
+
+**Structural → How classes/objects are COMBINED**
+
+* Adapter
+* Bridge
+* Composite
+* Decorator
+* Facade
+* Flyweight
+* Proxy
+
+**Behavioral → How objects COMMUNICATE/BEHAVE**
+
+* Observer
+* Strategy
+* Command
+* State
+* Iterator
+* Template Method
+* Mediator
+* Memento
+* Chain of Responsibility
+* Visitor
+
+### 🎯 For this question
+
+> **Select the design patterns under Creational**
+
+**👉 Singleton + Factory Method** ✅
+
 These four are among the most commonly used design patterns. Each solves a different kind of problem.
 
 | Pattern      | Purpose                                    | Key Idea                                  |
